@@ -5,11 +5,27 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useFormState } from 'react-dom';
 import { changePassword } from '../actions';
+import { useEffect, useRef } from 'react';
+import { toast } from '@/hooks/use-toast';
+import { useRouter } from 'next-nprogress-bar';
 
 export default function ChangePasswordForm() {
     const [state, actionChange] = useFormState(changePassword, null);
+    const router = useRouter();
+    const formRef = useRef<HTMLFormElement>(null);
+
+    useEffect(() => {
+        if (state?.name) {
+            toast({
+                title: 'Thành công!',
+                description: 'Cập nhật mật khẩu thành công',
+            });
+            formRef.current?.reset();
+        }
+    }, [state, router]);
+
     return (
-        <form action={actionChange} className="space-y-4 mt-4">
+        <form ref={formRef} action={actionChange} className="space-y-4 mt-4">
             <div className="space-y-2">
                 <Label>Mật khẩu hiện tại</Label>
                 <Input name="password" placeholder="Enter your current password" type="password" />

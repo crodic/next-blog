@@ -54,10 +54,6 @@ const data = {
                     title: 'Cài Đặt Website',
                     url: '/dashboard/settings/website',
                 },
-                {
-                    title: 'Quản Trị Viên',
-                    url: '#',
-                },
             ],
         },
     ],
